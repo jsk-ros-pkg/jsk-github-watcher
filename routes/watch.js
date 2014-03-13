@@ -8,7 +8,7 @@ var github = new GitHubApi({
     // optional
     debug: true,
     protocol: 'https',
-    host: 'localhost:3000',
+    host: 'http://jsk-github-watcher.herokuapp.com/',
     pathPrefix: '/api/v3', // for some GHEs
     timeout: 5000
 });
@@ -26,7 +26,7 @@ exports.get = function(req, res, next) {
   github.authorization.create({
     scopes: ['user', 'public_repo', 'repo', 'repo:status', 'gist'],
     note: 'what this auth is for',
-    note_url: 'http://localhost:3000',
+    note_url: 'http://jsk-github-watcher.herokuapp.com/',
     headers: {
       'X-GitHub-OTP': 'two-factor-code'
     }
