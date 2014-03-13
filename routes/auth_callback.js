@@ -10,7 +10,6 @@ exports.get_url = '/auth_callback';
 exports.get = function(req, res, next) {
   var uri = url.parse(req.url);
   var values = qs.parse(uri.query);
-  
   github.auth.login(values.code, function(err, token) {
     var client = github.client(token);
     var org_promises = _.map(CONFIG.orgs, function(org) {
@@ -19,7 +18,16 @@ exports.get = function(req, res, next) {
       var repo_promises = ghorg.reposQ(function(err, repos, headers) {
         return _.map(repos, function(repo) {
           var ghrepo = client.repo(util.format('%s/%s', org, repo.name));
-          return ghrepo.watchQ({subscribed: true});
+          var deferred = Q.defer();
+          ghrepo.watch({subscribed: true}, function(err, result) {
+            if (err) {
+              deferred.reject(err);
+            }
+            else {
+              deferred.resolve(repo);
+            }
+          });
+          return deferred.promise;
         });
       });
       return repo_promises;
@@ -27,7 +35,10 @@ exports.get = function(req, res, next) {
     var all_watch_promises = _.flatten(org_promises);
     Q.allSettled(all_watch_promises)
       .then(function(results) {
-        res.send(200);
+        res.render('repos_info', {
+          title: CONFIG.title,
+          orgs_infos: results
+        });
       })
       .fail(function(errors) {
         next(errors);

@@ -1,0 +1,44 @@
+<% include header %>
+<div class="container">
+  <div class="page-header">
+    <h1><%= title %></h1>
+  </div>
+</div>
+
+<% for (var i = 0; i < orgs_infos.length; i++) { %>
+   <% var repos_info = orgs_infos[i].value; %>
+   <% var org_name = repos_info[0].owner.login; %>
+   <div class="container">
+     <ul class="list-group">
+       <li class="list-group-item-info list-group-item">
+         <h2><a href="http://github.com/<%- org_name %>"><%= org_name %></a></h2>
+       </li>
+       <% for (var j = 0; j < repos_info.length; j++) { %>
+          <% var repo_info = repos_info[j]; %>
+          <% var name = repo_info.name; %>
+          <% var issue_num = repo_info.open_issues_count; %>
+          <% var pr_num = 0; %>
+          <li class="list-group-item">
+            <h3><a target="_blank" href="http://github.com/<%- org_name %>/<%- name %>"><%= name %></a>
+              <a target="_blank" href="http://travis-ci.org/<%- org_name %>/<%- name %>">
+                <img src="http://travis-ci.org/<%- org_name %>/<%- name %>.png"></img>
+              </a>
+            </h3>
+        <% if (issue_num > 0) { %>
+        <a target="_blank" href="http://github.com/<%- org_name %>/<%- name %>/issues">
+          <span class="label label-info"><%= issue_num %> issues</span>
+        </a>
+        <% } %>
+        <% if (pr_num > 0) { %>
+        <a target="_blank" href="http://github.com/<%- org_name %>/<%- name %>/pulls">
+          <span class="label label-success"><%= pr_num %> PRs</span>
+        </a>
+        <% } %>
+      </li>
+          
+       <% } %>
+     </ul>
+   </div>
+<% } %>
+
+<% include footer %>
