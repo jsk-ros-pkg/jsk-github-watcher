@@ -8,7 +8,7 @@ var github = new GitHubApi({
     // optional
     debug: true,
     protocol: 'https',
-    host: 'github.my-GHE-enabled-company.com',
+    host: 'localhost:3000',
     pathPrefix: '/api/v3', // for some GHEs
     timeout: 5000
 });
@@ -22,7 +22,7 @@ github.authenticate({
 
 exports.get_url = '/watch';
 
-exports.get = function(req, res) {
+exports.get = function(req, res, next) {
   github.authorization.create({
     scopes: ['user', 'public_repo', 'repo', 'repo:status', 'gist'],
     note: 'what this auth is for',
@@ -32,7 +32,7 @@ exports.get = function(req, res) {
     }
   }, function(err, res) {
     if (err) {
-      console.log(err);
+      next(err);
     }
     else if (res.token) {
       //save and use res.token as in the Oauth process above from now on
