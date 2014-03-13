@@ -8,6 +8,9 @@ var http = require('http');
 var path = require('path');
 var CONFIG = require('./config');
 var app = express();
+var github = require('octonode');
+
+require('./models');
 
 // all environments
 app.set('port', process.env.PORT || 3000);

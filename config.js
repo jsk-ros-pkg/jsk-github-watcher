@@ -3,5 +3,6 @@ module.exports = {
   auth: {
     client_id: process.env['JSK_GITHUB_WATCHER_CLIENT_ID'],
     client_secret: process.env['JSK_GITHUB_WATCHER_CLIENT_SECRET']
-  }
+  },
+  orgs: ['jsk-ros-pkg', 'start-jsk', 'euslisp']
 };

@@ -9,6 +9,7 @@ module.exports = function(grunt) {
       files: [
         'Gruntfile.js',
         './routes/*.js',
+        './models/*.js',
         '*.js'
       ]
     },
