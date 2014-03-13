@@ -17,7 +17,7 @@
           <% var repo_info = repos_info[j]; %>
           <% var name = repo_info.name; %>
           <% var issue_num = repo_info.open_issues_count; %>
-          <% var pr_num = 0; %>
+          <% var pr_num = repo_info.pr_num; %>
           <li class="list-group-item">
             <h3><a target="_blank" href="http://github.com/<%- org_name %>/<%- name %>"><%= name %></a>
               <a target="_blank" href="http://travis-ci.org/<%- org_name %>/<%- name %>">
