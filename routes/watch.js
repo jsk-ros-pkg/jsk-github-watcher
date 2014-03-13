@@ -8,7 +8,7 @@ var github = new GitHubApi({
     // optional
     debug: true,
     protocol: 'https',
-    host: 'http://jsk-github-watcher.herokuapp.com/',
+    host: 'jsk-github-watcher.herokuapp.com',
     pathPrefix: '/api/v3', // for some GHEs
     timeout: 5000
 });
