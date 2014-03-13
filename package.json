@@ -8,7 +8,8 @@
   "dependencies": {
     "express": "3.4.8",
     "ejs": "*",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "github": "~0.1.14"
   },
   "devDependencies": {
     "grunt-contrib-concat": "~0.3.0",
