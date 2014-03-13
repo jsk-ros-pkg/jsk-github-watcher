@@ -13,7 +13,7 @@ module.exports = function(grunt) {
       ]
     },
     watch: {
-      files: ['app.js', './routes/*.js', 'Gruntfile.js', '.jshintrc'],
+      files: ['*.js', './routes/*.js', 'Gruntfile.js', '.jshintrc'],
       tasks: ['build']
     }
   });
