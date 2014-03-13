@@ -13,7 +13,7 @@ module.exports = function(grunt) {
       ]
     },
     watch: {
-      files: ['./**/*.js', 'Gruntfile.js', '.jshintrc'],
+      files: ['app.js', './routes/*.js', 'Gruntfile.js', '.jshintrc'],
       tasks: ['build']
     }
   });
@@ -27,5 +27,4 @@ module.exports = function(grunt) {
   
   grunt.registerTask('build', ['jshint']);
   grunt.registerTask('default', ['build']);
-  grunt.registerTask('doc', ['jsdoc']);
 };
