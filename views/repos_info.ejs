@@ -7,7 +7,7 @@
 
 <% for (var i = 0; i < orgs_infos.length; i++) { %>
    <% var repos_info = orgs_infos[i].value; %>
-   <% var org_name = repos_info[0].owner.login; %>
+   <% var org_name = owener; %>
    <div class="container">
      <ul class="list-group">
        <li class="list-group-item-info list-group-item">
@@ -35,7 +35,7 @@
         </a>
         <% } %>
       </li>
-          
+
        <% } %>
      </ul>
    </div>
