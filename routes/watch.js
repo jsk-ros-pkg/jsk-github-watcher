@@ -27,6 +27,7 @@ exports.get_url = '/watch/:org';
 exports.get = function(req, res, next) {
   var code = req.session.github_code;
   var org = req.params.org;
+  var repos_count = 0;
   console.log(org);
   github.auth.login(code, function(err, token) {
     console.log('login done');
@@ -43,6 +44,7 @@ exports.get = function(req, res, next) {
           org_deferred.reject(err);
         }
         else {
+          repos_count = repos.length;
           console.log(repos.length + " repositories");
           var repos_promises = _.map(repos, function(repo) {
             console.log('creating promise for ' + repo.name);
@@ -72,7 +74,8 @@ exports.get = function(req, res, next) {
       .then(function(results) {
         res.render('authorized', {
           title: CONFIG.title,
-          done: true
+          done: true,
+          done_count: repos_count
         });
       })
       .fail(function(errors) {
