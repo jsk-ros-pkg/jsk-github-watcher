@@ -45,13 +45,13 @@ exports.get = function(req, res, next) {
         }
         else {
           repos_count = repos.length;
-          console.log(repos.length + " repositories");
+          console.log(repos.length + ' repositories');
           var repos_promises = _.map(repos, function(repo) {
             console.log('creating promise for ' + repo.name);
             var ghrepo = client.repo(util.format('%s/%s', org, repo.name));
             var deferred = Q.defer();
             ghrepo.watch({subscribed: true}, function(err, result) {
-              console.log("watching " + repo.name + " done");
+              console.log('watching ' + repo.name + ' done');
               if (err) {
                 deferred.reject(err);
               }
